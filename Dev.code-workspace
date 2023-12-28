@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../assignments-master"
+		},
+		{
+			"path": "../../capstone-projects"
+		},
+		{
+			"path": "../../Test"
+		}
+	],
+	"settings": {
+		"C_Cpp.autocompleteAddParentheses": false,
+		"C_Cpp.autocomplete": "disabled",
+		"debug.javascript.autoAttachFilter": "disabled"
+	}
+}
