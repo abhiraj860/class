@@ -27,25 +27,23 @@ function Board({xIsNext, squares, onPlay}) {
   } else {
     status = 'Next player: ' + (xIsNext ? 'X' : 'O');
   }
+
+  const renderBoard = ()=>{
+    const board = [];
+    board.push(<div className='status'>{status}</div>);
+    for(let i = 0; i < 9; i += 3) {
+      const row = [];
+      for(let k = i; k < i + 3; k++) {
+        row.push(<Square value={squares[k]} onSquareClick={()=>handleClick(k)}/>);
+      }
+      board.push(<div className='board-row'>{row}</div>);
+    }
+    return board;
+  }
   
   return (
     <div>
-      <div className='status'>{status}</div>
-      <div className='board-row'>
-        <Square value={squares[0]} onSquareClick={()=>handleClick(0)}/>
-        <Square value={squares[1]} onSquareClick={()=>handleClick(1)}/>
-        <Square value={squares[2]} onSquareClick={()=>handleClick(2)}/>
-      </div>
-      <div className='board-row'>
-        <Square value={squares[3]} onSquareClick={()=>handleClick(3)}/>
-        <Square value={squares[4]} onSquareClick={()=>handleClick(4)}/>
-        <Square value={squares[5]} onSquareClick={()=>handleClick(5)}/>
-      </div>
-      <div className='board-row'>
-        <Square value={squares[6]} onSquareClick={()=>handleClick(6)}/>
-        <Square value={squares[7]} onSquareClick={()=>handleClick(7)}/>
-        <Square value={squares[8]} onSquareClick={()=>handleClick(8)}/>
-      </div>
+      {renderBoard()}
     </div>
   );
 }
@@ -73,6 +71,7 @@ function calculateWinner(squares) {
 export default function Game() {
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
+  const [toggle, setToggle] = useState(true);
   const xIsNext = currentMove % 2 === 0;
   
   const currentSquares = history[currentMove];
@@ -86,26 +85,38 @@ export default function Game() {
   function jumpTo(nextMove) {
     setCurrentMove(nextMove);
   }
+
+  let buttonArr = [];
+  function handleToggle() {
+    // buttonArr = buttonArr.reverse();
+    // console.log('Here');
+    setToggle(!toggle);
+    // console.log(buttonArr);
+  }
+
+  
   const moves = history.map((squares, move)=>{
     let description;
     if(move > 0) {
-      description = 'Go to move #' + move;
+      description = 'Go to move # ' + move;
     } else {
       description = 'Go to game start';
     }
-    return (
-      <li key={move}>
-        <button onClick={()=> jumpTo(move)}>{description} </button>
-      </li>
-    );
+    const ele = <li key={move}><button onClick={()=> jumpTo(move)}>{description} </button> </li>;
+    buttonArr.push(ele);
+    return ele;
   });
+
+
   return (
     <div className = 'game'>
         <div className='game-board'>
+        <h3> You are at move {currentMove}</h3>
           <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
         </div>
         <div className = 'game-info'>
-          <ol>{moves}</ol>
+          <button onClick={handleToggle}>Toggle State</button>
+          {[<ol>{buttonArr}</ol>]}
         </div>
     </div>
   );
