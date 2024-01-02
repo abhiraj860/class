@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import './App.css'
 
-function InputItem({oninput}) {
+function InputItem({oninput, message}) {
   return (
-    <input type='text' placeholder='Add a new item' onChange={oninput} />
+    <input type='text' placeholder='Add a new item' onChange={oninput} value={message}/>
   );
 }
 
@@ -12,6 +12,8 @@ function AddItem({handler}) {
     <button onClick={handler}>Add</button>
   );
 }
+
+
 
 function Lists({getList}) {
   function lists() {
@@ -28,25 +30,45 @@ function Lists({getList}) {
 }
 
 function ShoppingList() {
-  const [items, setItems] = useState(['Apple', 'Orange', 'Mango','Peach', 'Melo']);
-  const [input, setInput] = useState('dfdfds');
+  const [items, setItems] = useState([]);
+  const [input, setInput] = useState('');
+  const [message, setMessage] = useState('');
 
   function inputHandler(event) {
     setInput(event.target.value);
+    setMessage(event.target.value);
   }
 
-  function clickHandler() {
+
+  function addHandler() {
+    if(input.length === 0) {
+      alert('Please enter an input');
+      return;
+    }
     const newArr = [...items, input];
+    setItems(newArr);
+    setInput('');
+    setMessage('');
+  }
+  
+  function removeHandler() {
+    if(items.length === 0) {
+      alert('Nothing to remove');
+      return;
+    }
+    const newArr = [...items];
+    newArr.pop();
     setItems(newArr);
   }
 
   return (
     <div>
       <div>
-        <InputItem oninput={inputHandler}/> <AddItem handler={clickHandler}/>
+        <InputItem oninput={inputHandler} message={message}/> <AddItem handler={addHandler}/>
+        <button onClick={removeHandler}>Remove</button>
       </div>
       <div>
-        <Lists getList={items}/>
+        <Lists getList={items} removeHandler={removeHandler}/>
       </div>
     </div>
   );
