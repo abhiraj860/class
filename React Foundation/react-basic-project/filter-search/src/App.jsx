@@ -18,10 +18,10 @@ function SearchTable({checkHandler, inputHandler}) {
   );
 }
 
-function ProductTable({items}) {
+function ProductTable({filterItems}) {
   const fruits = [];
   const vegetables = [];
-  items.map((products)=>{
+  filterItems.map((products)=>{
     if(products.category === "Fruits") {
       fruits.push(products);
     } else {
@@ -54,32 +54,33 @@ function ProductTable({items}) {
 
 function App() {
   const [items, setItems] = useState(PRODUCTS);
-  
+  const [filterItems, setFilterItems] = useState(PRODUCTS);
+
   function checkHandler(event) {
     if(event.target.checked) {
-      const newArr = PRODUCTS.filter((value)=>{
+      const newArr = filterItems.filter((value)=>{
         if(value.stocked === true) {
           return value;
         }
       });
-      setItems(newArr);
+      setFilterItems(newArr);
     } else {
       const newArr = PRODUCTS.slice();
-      setItems(newArr);
+      setFilterItems(newArr);
     } 
   }
 
   function inputHandler(event) {
-    const newArr = PRODUCTS.filter((value)=>{
+    const newArr = items.filter((value)=>{
       return value.name.startsWith(event.target.value);
     });
-    setItems(newArr);
+    setFilterItems(newArr);
   }
 
   return (
     <div>
       <SearchTable checkHandler={checkHandler} inputHandler={inputHandler}/>
-      <ProductTable items={items}/>
+      <ProductTable filterItems={filterItems}/>
     </div>
   )
 }
