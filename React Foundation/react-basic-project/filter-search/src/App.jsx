@@ -9,25 +9,11 @@ const PRODUCTS = [
   {category: "Vegetables", price: "$1", stocked: true, name: "Peas"}
 ];
 
-function Search() {
-  return (
-    <input type='text' placeholder='Search...' />
-  );
-}
-
-function Check() {
+function SearchTable({checkHandler}) {
   return (
     <div>
-      <input type='checkbox' /> Only show product in stock
-    </div>
-  );
-}
-
-function SearchTable() {
-  return (
-    <div>
-      <Search />
-      <Check />
+      <input type='text' placeholder='Search...' /> <br></br>
+      <input type='checkbox' onChange={checkHandler}/> Only show product in stock
     </div>
   );
 }
@@ -72,10 +58,24 @@ function ProductTable({items}) {
 
 function App() {
   const [items, setItems] = useState(PRODUCTS);
+  
+  function checkHandler(event) {
+    if(event.target.checked) {
+      const newArr = items.filter((value)=>{
+        if(value.stocked === true) {
+          return value;
+        }
+      });
+      setItems(newArr);
+    } else {
+      const newArr = PRODUCTS;
+      setItems(newArr);
+    } 
+  }
 
   return (
     <div>
-      <SearchTable />
+      <SearchTable checkHandler={checkHandler}/>
       <ProductTable items={items}/>
     </div>
   )
