@@ -9,10 +9,10 @@ const PRODUCTS = [
   {category: "Vegetables", price: "$1", stocked: true, name: "Peas"}
 ];
 
-function SearchTable({checkHandler}) {
+function SearchTable({checkHandler, inputHandler}) {
   return (
     <div>
-      <input type='text' placeholder='Search...' /> <br></br>
+      <input type='text' onChange={inputHandler} placeholder='Search...' /> <br></br>
       <input type='checkbox' onChange={checkHandler}/> Only show product in stock
     </div>
   );
@@ -36,21 +36,17 @@ function ProductTable({items}) {
     let col = ele.stocked === true ? 'black' : 'red'; 
     return (<li key={id}><span style={{color: col}} >{ele.name}</span> &nbsp;&nbsp;{ele.price}</li>)
   });
+  const tabl = [];
+  if(fruitsEle.length !== 0) {
+    tabl.push(<div><b>Fruits</b><ul className='ul'>{fruitsEle}</ul></div>);
+  }
+  if(vegetableEle.length !== 0) {
+    tabl.push(<div><b>Vegetables</b><ul className='ul'>{vegetableEle}</ul></div>);
+  }
   return (
     <div>
       <p> <b>Name</b>  <b>Price</b></p>
-      <div>
-        <b>Fruits</b>
-        <ul className='ul'>
-          {fruitsEle}
-        </ul>
-      </div>
-      <div>
-        <b>Vegetables</b>
-        <ul className='ul'>
-          {vegetableEle}      
-        </ul>
-      </div>
+      {tabl}
     </div>
 
   );
@@ -61,7 +57,7 @@ function App() {
   
   function checkHandler(event) {
     if(event.target.checked) {
-      const newArr = items.filter((value)=>{
+      const newArr = PRODUCTS.filter((value)=>{
         if(value.stocked === true) {
           return value;
         }
@@ -73,9 +69,16 @@ function App() {
     } 
   }
 
+  function inputHandler(event) {
+    const newArr = PRODUCTS.filter((value)=>{
+      return value.name.startsWith(event.target.value);
+    });
+    setItems(newArr);
+  }
+
   return (
     <div>
-      <SearchTable checkHandler={checkHandler}/>
+      <SearchTable checkHandler={checkHandler} inputHandler={inputHandler}/>
       <ProductTable items={items}/>
     </div>
   )
