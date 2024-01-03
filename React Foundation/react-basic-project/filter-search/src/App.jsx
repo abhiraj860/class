@@ -1,12 +1,12 @@
 import { useState } from 'react'
 
 const PRODUCTS = [
-  {category: "Fruits", price: "$1", stocked: true, name: "Apple"},
-  {category: "Fruits", price: "$1", stocked: true, name: "Dragonfruit"},
-  {category: "Fruits", price: "$2", stocked: false, name: "Passionfruit"},
-  {category: "Vegetables", price: "$2", stocked: true, name: "Spinach"},
-  {category: "Vegetables", price: "$4", stocked: false, name: "Pumpkin"},
-  {category: "Vegetables", price: "$1", stocked: true, name: "Peas"}
+  {id:1, category: "Fruits", price: "$1", stocked: true, name: "Apple"},
+  {id:2, category: "Fruits", price: "$1", stocked: true, name: "Dragonfruit"},
+  {id:3, category: "Fruits", price: "$2", stocked: false, name: "Passionfruit"},
+  {id:4, category: "Vegetables", price: "$2", stocked: true, name: "Spinach"},
+  {id:5, category: "Vegetables", price: "$4", stocked: false, name: "Pumpkin"},
+  {id:6, category: "Vegetables", price: "$1", stocked: true, name: "Peas"}
 ];
 
 function SearchTable({checkHandler, inputHandler}) {
@@ -28,13 +28,13 @@ function ProductTable({items}) {
       vegetables.push(products);
     }
   });
-  const fruitsEle = fruits.map((ele, id)=>{
+  const fruitsEle = fruits.map((ele)=>{
     let col = ele.stocked === true ? 'black' : 'red'; 
-    return (<li key={id}><span style={{color: col}}>{ele.name}</span> &nbsp;&nbsp;{ele.price}</li>)
+    return (<li key={ele.id}><span style={{color: col}}>{ele.name}</span> &nbsp;&nbsp;{ele.price}</li>)
   });
-  const vegetableEle = vegetables.map((ele, id)=>{
+  const vegetableEle = vegetables.map((ele)=>{
     let col = ele.stocked === true ? 'black' : 'red'; 
-    return (<li key={id}><span style={{color: col}} >{ele.name}</span> &nbsp;&nbsp;{ele.price}</li>)
+    return (<li key={ele.id}><span style={{color: col}} >{ele.name}</span> &nbsp;&nbsp;{ele.price}</li>)
   });
   const tabl = [];
   if(fruitsEle.length !== 0) {
@@ -64,7 +64,7 @@ function App() {
       });
       setItems(newArr);
     } else {
-      const newArr = PRODUCTS;
+      const newArr = PRODUCTS.slice();
       setItems(newArr);
     } 
   }
