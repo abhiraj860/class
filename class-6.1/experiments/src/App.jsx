@@ -1,31 +1,47 @@
 import React, {  useState } from 'react'
 
-const Header = React.memo(
-  
-function Header({title}) {
-  return (
-    <div>
-      My name is &nbsp;{title}
-    </div>
-  );
-}
-);
-
-
 
 function App() {
-  const [name, setName] = useState('Abhiraj 1');
-  function clickHandle() {
-    setName(Math.random());
-  }
+  const [todos, setTodos] = useState([{
+    id: 1,
+    title: 'go to gym',
+    description: 'go to gym'
+  }, {
+    id: 2,
+    title: 'tech',
+    description: 'techie'
+  }, {
+    id: 3,
+    title: 'hello',
+    description: 'say hello'
+  } 
+]);
+  
+function addTodo() {
+  setTodos([...todos, {
+    id: 4,
+    title: "abc",
+    description: "avfaasfd"
+  }]);
+}
+
+return (
+  <div>
+    <button onClick={addTodo}>Add a todo</button>
+    {todos.map(todo=> <Todo key={todo.id} title={todo.title} description={todo.description} />)}
+  </div>
+);
+}
+
+function Todo({title, description}) {
   return (
     <div>
-      <button onClick={clickHandle}>Click me to change the title</button>
-      <Header title={name} />  
-      <Header title={"Abhiraj 2"} />  
-      <Header title={"Abhiraj 3"} />  
-      <Header title={"Abhiraj 4"} />  
-      <Header title={name} />  
+      <h1>
+        {title}
+      </h1>
+      <h5>
+        {description}
+      </h5>
     </div>
   );
 }
