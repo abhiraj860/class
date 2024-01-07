@@ -1,22 +1,30 @@
+import { useEffect, useState } from "react"
+
 function App() {
-  return <div>
-    <CardWrapper innerComponent={<TextComponenet/>} />
-  </div>
-}
-// console.log('here');
+  const [todos, setTodos] = useState([]);  
+  
+  useEffect(()=> {
+    setInterval(()=>{
+      fetch('https://sum-server.100xdevs.com/todos')
+      .then(async(res)=>{
+        const json = await res.json();
+        setTodos(json.todos);
+      })
+    }, 2000);
+    
+  }, []);
+  
+  const arr = todos.map((todo)=> {
+    return <div key = {todo.id}>
+      <div><b>Title:</b> {todo.title}</div>
+      <div><b>Description:</b> {todo.description}</div>
+      <br></br>
+    </div>
+    
+  });
 
-function TextComponenet() {
   return <div>
-    hi there
-  </div>
-}
-
-function CardWrapper({innerComponent}) {
-  return <div style={{
-    border: "2px solid black",
-    borderRadius: '10px'
-  }}>
-    {innerComponent}
+     {arr}
   </div>
 }
 
