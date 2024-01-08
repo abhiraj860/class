@@ -1,36 +1,25 @@
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+import { memo, useCallback, useState } from "react";
 
 function App() {
-  const [id, setId] = useState(1);
+  const [count, setCount] = useState(0)
+
+  const inputSomething = useCallback(() => {
+      console.log("child clicked")
+  }, []) 
+
   return <div>
-    <button onClick={()=>setId(1)}>1</button>
-    <button onClick={()=>setId(2)}>2</button>
-    <button onClick={()=>setId(3)}>3</button>
-    <button onClick={()=>setId(4)}>4</button>
-    <TodoId id={id} />
+    <ButtonChild inputSomething={inputSomething}/>
+    <button onClick={() => {
+      setCount(count + 1);
+    }}>Click me {count}</button>
   </div>
 }
 
-function TodoId({id}) {
-  const [todo, setTodo] = useState({});
-  
-  useEffect(()=>{
-    axios.get(`https://sum-server.100xdevs.com/todo?id=${id}`)
-    .then(function(response) {
-      setTodo(response.data.todo);
-    })
-  }, [id])
-
-
+const ButtonChild = memo(({inputSomething}) => {
+  console.log("child render")
   return <div>
-    <h1>
-      {todo.title}
-    </h1>
-    <h4>
-      {todo.description}
-    </h4>
+    <button>Button clicked</button>
   </div>
-}
+})
 
-export default App
+export default App;
