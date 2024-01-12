@@ -1,25 +1,10 @@
-import { memo, useCallback, useState } from "react";
+import {useState} from 'react';
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  const inputSomething = useCallback(() => {
-      console.log("child clicked")
-  }, []) 
-
+  const [color, setColor] = useState('red');
   return <div>
-    <ButtonChild inputSomething={inputSomething}/>
-    <button onClick={() => {
-      setCount(count + 1);
-    }}>Click me {count}</button>
+    My favourite color is {color}
   </div>
 }
-
-const ButtonChild = memo(({inputSomething}) => {
-  console.log("child render")
-  return <div>
-    <button>Button clicked</button>
-  </div>
-})
 
 export default App;
