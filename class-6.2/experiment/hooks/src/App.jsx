@@ -1,18 +1,21 @@
-import {useState, useEffect} from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [calc, setCalc] = useState(0);
+  const [incomeTax, setIncomeTax] = useState(20000);
+  const divRef = useRef();
 
-  useEffect(()=>{
-    setCalc(()=>2 * count);
-  }, [count]);
+  useEffect(() => {
+    setTimeout(() => {
+      console.log(divRef.current);
+      divRef.current.innerHTML = "10"
+    }, 5000);
+  }, [])
 
-  return <div>
-    <p>Count; {count}</p>
-    <button onClick={()=>setCount(count + 1)}>+</button>
-    <p>Calculations: {calc}</p>
-  </div>
+  return (
+    <div>
+        hi there, your income tax returns are <div ref={divRef}>{incomeTax}</div>
+    </div>
+  )
 }
 
-export default App;
+export default App
