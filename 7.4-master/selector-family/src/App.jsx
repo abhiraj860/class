@@ -1,7 +1,7 @@
 
 import './App.css'
-import { RecoilRoot, useRecoilState } from 'recoil';
-import { todosAtomFamily } from './atoms';
+import { RecoilRoot, useRecoilState, useRecoilStateLoadable, useRecoilValueLoadable  } from 'recoil';
+import { todosAtomFamily} from './atoms';
 
 function App() {
   return <RecoilRoot>
@@ -11,15 +11,24 @@ function App() {
 }
 
 function Todo({id}) {
-   const [todo, setTodo] = useRecoilState(todosAtomFamily(id));
-
-  return (
-    <>
-      {todo.title}
-      {todo.description}
-      <br />
-    </>
-  )
+   const todo = useRecoilValueLoadable(todosAtomFamily(id));
+    if(todo.state === 'loading') {
+      return <div>
+        loading...
+      </div>
+    } else if(todo.state === 'hasValue') {
+      return (
+        <>
+          {todo.contents.title}<br></br>
+          {todo.contents.description}
+          <br />
+        </>
+      )
+  } else if(todo.state === 'hasError') {
+    return <div>
+      Error while getting data from backend!!
+    </div>
+  }
 }
 
 export default App
