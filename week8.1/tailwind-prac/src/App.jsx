@@ -3,13 +3,14 @@ import { useState } from 'react'
 function App() {
 
   return (
-    <div style={{display: 'flex', justifyContent:'space-between'}}>
-      <div style={{backgroundColor: 'red'}}> hello</div>
-      <div style={{backgroundColor: 'green'}}> hello</div>
-      <div style={{backgroundColor: 'blue'}}> hello</div>
-      <div style={{backgroundColor: 'blue'}}> hello</div>
-      <div style={{backgroundColor: 'blue'}}> hello</div>
-    </div>
+    <>
+      <div className='grid grid-cols-1 md:grid-cols-3'>
+        <div className='bg-red-400'>Hello</div>
+        <div className='bg-green-400'>Hello</div>
+        <div className='bg-blue-300'>Hello</div>
+      </div>
+    </>
+    
   )
 }
 
