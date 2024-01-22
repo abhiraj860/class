@@ -1,14 +1,18 @@
-const express = require("express");
+const express = require('express');
+import { JWT_SECRET, PORT } from './config.js'; 
+
+const cors = require('cors');
 const app = express();
-const userRouter = require('./routes/index.js');
 
-const port = 3000;
 
+const mainRouter = require('./routes/index.js');
+
+app.use(cors());
 app.use(express.json());
 
-app.use('./api/v1', userRouter);
+app.use('./api/v1', mainRouter);
 
 
-app.listen(port, ()=>{
-    console.log(`Server is running on port ${port}`);
+app.listen(PORT, ()=>{
+    console.log(`Server is running on port ${PORT}`);
 });

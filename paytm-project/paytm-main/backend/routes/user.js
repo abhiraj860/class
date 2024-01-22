@@ -2,8 +2,8 @@ const {Router} = require('express');
 
 const router = Router();
 
-const userRouter = require('./user');
+router.post('/post', async()=>{
 
-router.use('/user', userRouter);
+});
 
 module.exports = router;
