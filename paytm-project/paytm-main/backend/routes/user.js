@@ -67,6 +67,32 @@ router.post('/signin', async(req, res)=>{
     });
 });
 
+
+router.get('/bulk', authMiddleware, async (req, res)=>{
+    const getFilter = req.query.filter;
+    try {
+        const getData = await User.find({$or:[{
+            firstName: {
+                '$regex': getFilter
+            }}, {lastName: {
+                '$regex': getFilter
+            }}
+        ]}).select('firstName lastName _id');
+        if(getData.length === 0) {
+            return res.status(400).json({
+                message: 'User not found'
+            });
+        }
+        res.status(200).json({users: getData});
+    } catch(err) {
+        res.status(407).json({
+            message: 'Contact not found'
+        });
+    }
+    
+});
+
+
 const updateSchema = z.object({
     password: z.string().min(2).optional(),
     firstName: z.string().min(1).optional(),
