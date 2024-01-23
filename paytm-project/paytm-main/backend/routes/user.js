@@ -1,6 +1,7 @@
 const {Router} = require('express');
 const {User} = require('../db');
 const { JWT_SECRET } = require('./config');
+const {authMiddleware} = require('./middleware');
 
 const jwt = require('jsonwebtoken');
 const z = require('zod');
@@ -65,6 +66,30 @@ router.post('/signin', async(req, res)=>{
         message: 'Error while logging in'
     });
 });
+
+const updateSchema = z.object({
+    password: z.string().min(2).optional(),
+    firstName: z.string().min(1).optional(),
+    lastName: z.string().min(2).optional()
+}).strict();
+
+router.put('/', authMiddleware, async(req, res)=>{
+    const getId = req.userId;
+    const updates = req.body;
+    const check = updateSchema.safeParse(updates);
+    if(check.success) {
+        const getObject = await User.findByIdAndUpdate(getId, updates);
+        res.status(200).json({
+            message: 'Updated successfully'
+        });
+    } else {
+        res.status(411).json({
+            message: 'Error while updating information'
+        });
+    }
+    
+});
+
 
 router.use((err, req, res, next) => {
     res.status(411).json({
