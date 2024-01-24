@@ -39,6 +39,7 @@ router.post('/transfer', authMiddleware, async (req, res)=>{
     await Account.updateOne({userId: to}, {'$inc': {balance: amount}}).session(session);
 
     await session.commitTransaction();
+    
     res.status(200).json({
         message: 'Transfer successful'
     });
