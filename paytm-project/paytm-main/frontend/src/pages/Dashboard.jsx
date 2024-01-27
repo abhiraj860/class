@@ -1,7 +1,14 @@
+import {Appbar} from '../components/Appbar'
+import {Balance} from '../components/Balance'
+import {Users} from '../components/Users'
 export function Dashboard() {
     return (
         <div>
-            From Dashboard
+            <Appbar />
+            <div>
+                <Balance />
+                <Users />
+            </div>
         </div>
     )
 }
