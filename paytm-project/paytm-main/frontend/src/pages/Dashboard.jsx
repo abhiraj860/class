@@ -3,12 +3,11 @@ import {Balance} from '../components/Balance'
 import {Users} from '../components/Users'
 export function Dashboard() {
     return (
-        <div>
+        <div className='mt-10'>
             <Appbar />
-            <div>
-                <Balance />
-                <Users />
-            </div>
+            <Balance />
+            <Users />
+            
         </div>
     )
 }
