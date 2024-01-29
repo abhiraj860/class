@@ -2,16 +2,21 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useIsOnline } from './hooks/useIsOnline';
 import { useMousePointer } from './hooks/useMousePointer';
+import { useInterval } from './hooks/useInterval';
+
+
 
 function App() {
   
+  const [count, setCount] =   useState(0);
   
-  const {xPos, yPos} = useMousePointer();
-    
+  useInterval(()=>{
+    setCount(c=>c + 1);
+  }, 1000)
   
   return (
     <div>
-      Mouse Pointer position {xPos} {yPos}
+      Timer set at {count}
     </div>
   )
 }
