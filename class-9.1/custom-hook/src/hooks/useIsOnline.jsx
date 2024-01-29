@@ -6,6 +6,10 @@ export function useIsOnline() {
     useEffect(()=>{
       window.addEventListener('online', ()=>setisOnline(true))
       window.addEventListener('offline', ()=>setisOnline(false))
+      return ()=>{
+        window.removeEventListener('online', ()=>setisOnline(true));
+        window.removeEventListener('offline', ()=>setisOnline(false));
+      }
     }, [])  
   
     return isOnline
