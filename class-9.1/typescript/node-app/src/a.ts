@@ -1,8 +1,22 @@
-function f2():void {
-    console.log("hi there");
+interface User{
+    firstName: string,
+    lastName: string,
+    age: number
 }
-function f1(f2:()=>void) {
-    setTimeout(f2, 1000);
+function isLegal(user:User) : boolean {
+    if(user.age > 18) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
-f1(f2);
+function greet(user:User) {
+    console.log("hi there " + user.firstName);
+}
+
+ifLegal({
+    firstName: "Abhiraj",
+    lastName: "Aditya",
+    age: 20
+});
