@@ -1,24 +1,18 @@
-interface User{
-    firstName: string,
-    lastName: string,
-    age: number,
-    email?: string
-}
-function isLegal(user:User) : boolean {
-    if(user.age > 18) {
-        return true;
-    } else {
-        return false;
-    }
+type keyInput = "up" | "left" | "right" | "down"
+
+enum Direction {
+    Up = 1,
+    Down,
+    Left ,
+    Right
 }
 
-function greet(user:User) {
-    console.log("hi there " + user.firstName);
+function doSomething(keyPressed: Direction) {
+
 }
 
-isLegal({
-    firstName: "Abhiraj",
-    lastName: "Aditya",
-    age: 20,
-    email: "Asksljkl@gmail.com"
-});
+doSomething(Direction.Up);
+doSomething(Direction.Left);
+doSomething(Direction.Left);
+console.log(Direction.Up);
+console.log(Direction.Down);
