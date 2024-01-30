@@ -1,7 +1,8 @@
 interface User{
     firstName: string,
     lastName: string,
-    age: number
+    age: number,
+    email?: string
 }
 function isLegal(user:User) : boolean {
     if(user.age > 18) {
@@ -18,5 +19,6 @@ function greet(user:User) {
 isLegal({
     firstName: "Abhiraj",
     lastName: "Aditya",
-    age: 20
+    age: 20,
+    email: "Asksljkl@gmail.com"
 });
