@@ -1,18 +1,15 @@
-type keyInput = "up" | "left" | "right" | "down"
-
-enum Direction {
-    Up = 1,
-    Down,
-    Left ,
-    Right
+function getEle<T>(args: T[]):T {
+    return args[0];
 }
 
-function doSomething(keyPressed: Direction) {
-
+interface User{
+    name: string
 }
 
-doSomething(Direction.Up);
-doSomething(Direction.Left);
-doSomething(Direction.Left);
-console.log(Direction.Up);
-console.log(Direction.Down);
+const first = getEle<User>([{name:"Abhiraj"}, {name:"Aditya"}]);
+const first2 = getEle<number>([1, 2]);
+const first3 = getEle<boolean>([true, false]);
+
+console.log(first);
+console.log(first2);
+console.log(first3);
