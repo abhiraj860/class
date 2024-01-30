@@ -15,7 +15,7 @@ function greet(user:User) {
     console.log("hi there " + user.firstName);
 }
 
-ifLegal({
+isLegal({
     firstName: "Abhiraj",
     lastName: "Aditya",
     age: 20
