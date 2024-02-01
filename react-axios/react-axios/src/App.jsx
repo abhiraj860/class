@@ -1,11 +1,23 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [post, setPost] = useState(null);
+  
+  useEffect(()=>{
+    axios.get("https://jsonplaceholder.typicode.com/posts/1").then(
+      (resp)=>setPost(()=>resp.data) 
+    );
+  }, []);
+
+  if(post === null) {
+    return;
+  }
 
   return (
     <div>
-      Hi there
+      <h1>{post.title}</h1>
+      <p>{post.body}</p>
     </div>    
   )
 }
