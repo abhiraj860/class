@@ -1,3 +1,5 @@
+// Update using sql 
+
 import { getClient } from "./utils";
 
 async function updateTodo(todoId: number) {
