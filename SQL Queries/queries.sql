@@ -1,3 +1,4 @@
+-- Review of sql queries first part
 SELECT column, another_column, …
 FROM mytable
 WHERE condition(s)
