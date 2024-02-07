@@ -1,16 +1,6 @@
 "use strict";
-function isLegal(user) {
-    if (user.age < 18) {
-        return false;
-    }
-    else {
-        return true;
-    }
+function printId(id) {
+    console.log(`ID: ${id}`);
 }
-const abhiraj = {
-    firstName: "Abhiraj",
-    lastName: "Aditya",
-    email: "abhiaditya@gmail.com",
-    age: 16
-};
-console.log(isLegal(abhiraj));
+console.log('12131313');
+console.log(123123123424323424);

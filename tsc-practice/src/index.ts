@@ -1,18 +1,17 @@
-interface Person {
+type Employee = {
     name: string;
-    age: number;
-    greet(phrase: string): void;
+    startDate: Date;
 }
 
-class Employees implements Person {
+type Manager = {
     name: string;
-    age: number;
-
-    constructor(n:string, a:number) {
-        this.name = n;
-        this.age = a;
-    } 
-    greet(phrase: string) {
-        console.log(`${phrase} ${this.name}`);
-    }
+    department: string;
 }
+
+type TeamLead = Employee & Manager;
+
+const team: TeamLead = {
+    name: "Abhiraj",
+    startDate: new Date(),
+    department: "Software dev"
+};
