@@ -1,5 +1,23 @@
-function sum(a : number, b : number )  : number {
-    return a + b;
+interface User {
+    firstName: string;
+    lastName: string; 
+    email: string;
+    age: number;    
 }
 
-console.log(sum(100, 200));
+function isLegal(user: User): boolean {
+    if(user.age < 18) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+const abhiraj: User = {
+    firstName: "Abhiraj",
+    lastName: "Aditya",
+    email: "abhiaditya@gmail.com",
+    age: 16
+}
+
+console.log(isLegal(abhiraj));

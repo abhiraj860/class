@@ -1,5 +1,16 @@
 "use strict";
-function sum(a, b) {
-    return a + b;
+function isLegal(user) {
+    if (user.age < 18) {
+        return false;
+    }
+    else {
+        return true;
+    }
 }
-console.log(sum(100, 200));
+const abhiraj = {
+    firstName: "Abhiraj",
+    lastName: "Aditya",
+    email: "abhiaditya@gmail.com",
+    age: 16
+};
+console.log(isLegal(abhiraj));
