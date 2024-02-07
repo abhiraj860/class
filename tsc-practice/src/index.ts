@@ -1,4 +1,5 @@
-function greet(name: String) {
-    console.log("Hello " + name);
+function sum(a : number, b : number )  : number {
+    return a + b;
 }
-greet("Abhiraj");
+
+console.log(sum(100, 200));

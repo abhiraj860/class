@@ -1,5 +1,5 @@
 "use strict";
-function greet(name) {
-    console.log("Hello " + name);
+function sum(a, b) {
+    return a + b;
 }
-greet("Abhiraj");
+console.log(sum(100, 200));
