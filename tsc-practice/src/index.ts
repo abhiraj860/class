@@ -1,14 +1,24 @@
-interface User {
-    name: string;
-    email: string;
-    speak:(name:string)=>string;
+interface TakePhoto {
+    cameraMode: string;
+    filter: string;
+    burst: number;
 };
 
-let user : User = {
-    name: 'Abhiraj',
-    email: 'abhiaditya860@gmail.com',
-    speak :(name) =>name
-};
+interface Story {
+    createStory(): void;
+}
 
-console.log(user.speak("tick"));
+class Instagram implements TakePhoto {
+    constructor(public cameraMode: string, public filter: string, public burst: number) {
 
+    }
+}
+
+class Youtube implements TakePhoto, Story {
+    constructor(public cameraMode: string, public filter: string, public burst: number, public short: number) {
+
+    }
+    createStory(): void {
+        
+    }
+}

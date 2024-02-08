@@ -1,8 +1,6 @@
 "use strict";
-;
-let user = {
-    name: 'Abhiraj',
-    email: 'abhiaditya860@gmail.com',
-    speak: (name) => name
+let sayHi;
+sayHi = (name) => {
+    console.log('hello' + name);
 };
-console.log(user.speak("tick"));
+sayHi('Danny');
