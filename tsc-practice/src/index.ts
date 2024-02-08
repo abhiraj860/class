@@ -1,24 +1,22 @@
-interface TakePhoto {
-    cameraMode: string;
-    filter: string;
-    burst: number;
+function identityOne(val: boolean | number) : boolean | number {
+    return val;
+}
+
+function identityTwo(val: any):any {
+    return val;
+}
+
+function identityThree<T>(val : T) : T {
+    return val;
+}
+
+function identityFour<T> (value: T) : T {
+    return value;
+}
+
+interface Bottle {
+    brand: string;
+    type: number;
 };
 
-interface Story {
-    createStory(): void;
-}
-
-class Instagram implements TakePhoto {
-    constructor(public cameraMode: string, public filter: string, public burst: number) {
-
-    }
-}
-
-class Youtube implements TakePhoto, Story {
-    constructor(public cameraMode: string, public filter: string, public burst: number, public short: number) {
-
-    }
-    createStory(): void {
-        
-    }
-}
+const res = identityFour<Bottle>({brand: "Afs", type: 2});
