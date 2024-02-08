@@ -1,23 +1,8 @@
 "use strict";
-;
-const users = [
-    {
-        firstName: "John",
-        lastName: "Doe",
-        age: 19
-    },
-    {
-        firstName: "Jane",
-        lastName: "Smith",
-        age: 30
-    },
-    {
-        firstName: "Bob",
-        lastName: "Johnson",
-        age: 22
-    }
-];
-function getLegal(user) {
-    return user.filter(value => (value.age > 18 && value));
-}
-console.log(getLegal(users));
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const calculator_1 = __importDefault(require("./calculator"));
+const calc = new calculator_1.default();
+console.log(calc.add(10, 9));

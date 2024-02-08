@@ -1,29 +1,5 @@
-interface User {
-    firstName: string;
-    lastName: string;
-    age: number;
-};
+import Calculator from "./calculator";
 
-const users: User[] = [
-    {
-        firstName: "John",
-        lastName: "Doe",
-        age: 19
-    },
-    {
-        firstName: "Jane",
-        lastName: "Smith",
-        age: 30
-    },
-    {
-        firstName: "Bob",
-        lastName: "Johnson",
-        age: 22
-    }
-];
+const calc = new Calculator();
 
-function getLegal(user: User[]) : User[] {
-    return user.filter(value=>(value.age > 18 && value));
-}
-
-console.log(getLegal(users));
+console.log(calc.add(10, 9));
