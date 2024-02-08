@@ -1,6 +1,8 @@
 "use strict";
-function logPoint(p) {
-    console.log(`${p.x}, ${p.y}`);
-}
-const point = { x: 12, y: 26 };
-logPoint(point);
+;
+let user = {
+    name: 'Abhiraj',
+    email: 'abhiaditya860@gmail.com',
+    speak: (name) => name
+};
+console.log(user.speak("tick"));

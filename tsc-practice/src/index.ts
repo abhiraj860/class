@@ -1,18 +1,14 @@
-interface Point {
-    x : number;
-    y: number;
-}
+interface User {
+    name: string;
+    email: string;
+    speak:(name:string)=>string;
+};
 
-function logPoint(p : Point) {
-    console.log(`${p.x}, ${p.y}`);
-}
+let user : User = {
+    name: 'Abhiraj',
+    email: 'abhiaditya860@gmail.com',
+    speak :(name) =>name
+};
 
-const point = {x : 12, y: 26};
-const point3 = {x: 12, y: 26, z: 89};
-
-logPoint(point);
-logPoint(point3);
-
-const rect = {x: 33, y: 3, width: 30, height: 34};
-logPoint(rect);
+console.log(user.speak("tick"));
 
