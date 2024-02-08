@@ -1,22 +1,17 @@
-function identityOne(val: boolean | number) : boolean | number {
-    return val;
+interface Quiz {
+    name: string;
+    type: string;
 }
-
-function identityTwo(val: any):any {
-    return val;
-}
-
-function identityThree<T>(val : T) : T {
-    return val;
-}
-
-function identityFour<T> (value: T) : T {
-    return value;
-}
-
-interface Bottle {
-    brand: string;
-    type: number;
+interface Course {
+    name: string;
+    author: string;
+    subject: string;
 };
 
-const res = identityFour<Bottle>({brand: "Afs", type: 2});
+class Sellable<T> {
+    public cart: T[] = [];  
+    
+    addToCart(product:T) {
+        this.cart.push(product);
+    }
+}
