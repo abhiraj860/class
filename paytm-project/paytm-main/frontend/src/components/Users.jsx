@@ -42,6 +42,7 @@ export function Users() {
 
 
 function Helper({users}) {
+    const navigate = useNavigate();
     return (
         <div className="flex justify-between w-3/4 mt-5">
         <div className="flex justify-start items-center">
