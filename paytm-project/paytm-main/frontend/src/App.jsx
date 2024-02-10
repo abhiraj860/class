@@ -6,7 +6,7 @@ import {Dashboard} from './pages/Dashboard';
 import {Send} from './pages/Send';
 
 function App() {
-
+  // Main routes
   return (
     <div>
         <BrowserRouter>
