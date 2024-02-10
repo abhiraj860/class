@@ -1,9 +1,12 @@
-export function Balance() {
+
+
+export function Balance({balance}) {
+    
     return (
         <div className="flex justify-center">    
-            <div class="w-3/4 font-bold text-lg flex justify-start">
-                <div class="mt-5">
-                    Your balance Rs 10,0000
+            <div className="w-3/4 font-bold text-lg flex justify-start">
+                <div className="mt-5">
+                    Your balance Rs {balance}
                 </div> 
             </div>
         </div>
