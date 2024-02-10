@@ -75,6 +75,7 @@ router.post('/signin', async(req, res)=>{
 
 router.get('/bulk', authMiddleware, async (req, res)=>{
     const getFilter = req.query.filter;
+    const getUserId = req.userId;
     try {
         const getData = await User.find({$or:[{
             firstName: {
@@ -82,7 +83,10 @@ router.get('/bulk', authMiddleware, async (req, res)=>{
             }}, {lastName: {
                 '$regex': getFilter
             }}
-        ]}).select('firstName lastName _id');
+        ],
+        _id: {
+            $ne: getUserId
+        }}).select('firstName lastName _id');
         if(getData.length === 0) {
             return res.status(400).json({
                 message: 'User not found'
@@ -98,28 +102,28 @@ router.get('/bulk', authMiddleware, async (req, res)=>{
 });
 
 
-const updateSchema = z.object({
-    password: z.string().min(2).optional(),
-    firstName: z.string().min(1).optional(),
-    lastName: z.string().min(2).optional()
-}).strict();
+// const updateSchema = z.object({
+//     password: z.string().min(2).optional(),
+//     firstName: z.string().min(1).optional(),
+//     lastName: z.string().min(2).optional()
+// }).strict();
 
-router.put('/', authMiddleware, async(req, res)=>{
-    const getId = req.userId;
-    const updates = req.body;
-    const check = updateSchema.safeParse(updates);
-    if(check.success) {
-        const getObject = await User.findByIdAndUpdate(getId, updates);
-        res.status(200).json({
-            message: 'Updated successfully'
-        });
-    } else {
-        res.status(411).json({
-            message: 'Error while updating information'
-        });
-    }
+// router.put('/', authMiddleware, async(req, res)=>{
+//     const getId = req.userId;
+//     const updates = req.body;
+//     const check = updateSchema.safeParse(updates);
+//     if(check.success) {
+//         const getObject = await User.findByIdAndUpdate(getId, updates);
+//         res.status(200).json({
+//             message: 'Updated successfully'
+//         });
+//     } else {
+//         res.status(411).json({
+//             message: 'Error while updating information'
+//         });
+//     }
     
-});
+// });
 
 
 router.use((err, req, res, next) => {

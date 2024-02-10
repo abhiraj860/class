@@ -18,7 +18,7 @@ export function Dashboard() {
         <div className='mt-10'>
             <Appbar firstName={firstName}/>
             <Balance balance={balance} />
-            <Users/>
+            <Users />
             
         </div>
     )
