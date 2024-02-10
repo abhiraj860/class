@@ -5,22 +5,29 @@ import {Button} from '../components/Button'
 import {BottomWarning} from '../components/BottomWarning'
 import { useState } from 'react'
 import axios from 'axios'
-
+import { useNavigate } from 'react-router-dom';
 export function SignUp() {
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [username, setusername] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
     
     async function clickHandler() {
-        const response = await axios.post('http://localhost:3000/api/v1/user/signup', {
-            username,
-            firstName,
-            lastName,
-            password
-        });
-        localStorage.setItem("token", response.data.token);
+        try {
+            const response = await axios.post('http://localhost:3000/api/v1/user/signup', {
+                username,
+                firstName,
+                lastName,
+                password
+            });
+            localStorage.setItem("token", response.data.token);
+            navigate('/dashboard');
+        } catch (error) {
+            alert(error.response.data.message);
+        }
+        
     }
 
     return (
