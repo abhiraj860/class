@@ -12,11 +12,17 @@ export function Users() {
             setUsers(()=>[]);
             return;
         } 
-        axios.get("http://localhost:3000/api/v1/user/bulk?filter="+filter, {
-            headers: {
-                authorization: "Bearer " + localStorage.getItem("token")
-            }
-        }).then(resp=>{setUsers(()=>resp.data.users)});
+        const t = setTimeout(() => {
+            axios.get("http://localhost:3000/api/v1/user/bulk?filter="+filter, {
+                headers: {
+                    authorization: "Bearer " + localStorage.getItem("token")
+                }
+            }).then(resp=>{setUsers(()=>resp.data.users)});    
+        }, 1000);
+        return () =>{
+            console.log("Here");
+            clearInterval(t);
+        }
     }, [filter]);
 
     return (
@@ -31,7 +37,7 @@ export function Users() {
                     <input onChange={e=>setFilter(e.target.value)} type="text" className="border-2 border-slate-200 rounded-sm w-3/4 p-2" placeholder="Search users..."/>
                 </div>
                 <div className="mt-5"></div>
-                {users.map(value=><Helper users={value}/>)}
+                {users.map((value, id)=><Helper key={id} users={value}/>)}
             </div>
             
         </div>
