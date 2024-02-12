@@ -6,21 +6,26 @@ import { useNavigate } from "react-router-dom";
 export function Users() {
     const [users, setUsers] = useState([]);
     const [filter, setFilter] = useState('');
-
+    const [show, setShow] = useState(false);
     useEffect(()=>{
         if(filter.length === 0) {
             setUsers(()=>[]);
+            setShow(()=>false);
             return;
         } 
-        const t = setTimeout(() => {
-            axios.get("http://localhost:3000/api/v1/user/bulk?filter="+filter, {
+        const t = setTimeout(async () => {
+            try {
+                await axios.get("http://localhost:3000/api/v1/user/bulk?filter="+filter, {
                 headers: {
                     authorization: "Bearer " + localStorage.getItem("token")
                 }
-            }).then(resp=>{setUsers(()=>resp.data.users)});    
-        }, 1000);
+                }).then(resp=>{setUsers(()=>resp.data.users)}, setShow(()=>false));
+            } catch(error) {
+                setShow(()=>true);
+            } 
+                
+        }, 500);
         return () =>{
-            console.log("Here");
             clearInterval(t);
         }
     }, [filter]);
@@ -37,7 +42,7 @@ export function Users() {
                     <input onChange={e=>setFilter(e.target.value)} type="text" className="border-2 border-slate-200 rounded-sm w-3/4 p-2" placeholder="Search users..."/>
                 </div>
                 <div className="mt-5"></div>
-                {users.map((value, id)=><Helper key={id} users={value}/>)}
+                {show===true ? <div className="font-bold text-lg w-3/4 text-center">No user found</div> : users.map((value, id)=><Helper key={id} users={value}/>)}
             </div>
             
         </div>
