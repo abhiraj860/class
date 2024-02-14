@@ -107,6 +107,30 @@ export function Transactions() {
                             </div>
                         </div>
                     </div>
+                    <div>    
+                        <div className=" font-bold text-xl ">
+                            <div className="flex justify-between items-center border-b-2 p-5"> 
+                                <div className=" text-black">
+                                    Abhiraj 
+                                </div>
+                                <div className=" text-red-500">
+                                    -1000 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>    
+                        <div className=" font-bold text-xl ">
+                            <div className="flex justify-between items-center border-b-2 p-5"> 
+                                <div className=" text-black">
+                                    Abhiraj 
+                                </div>
+                                <div className=" text-red-500">
+                                    -1000 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
