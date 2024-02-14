@@ -6,6 +6,8 @@ import {BottomWarning} from '../components/BottomWarning'
 import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
+import { Check } from '../components/Check'
+
 export function SignUp() {
 
     const [firstName, setFirstName] = useState('');
@@ -33,6 +35,7 @@ export function SignUp() {
     return (
         <div className='h-[632px] bg-gray-400 flex justify-center'>
             <div className='h-[530px] p-3 bg-white w-96 rounded-lg mt-9'>
+                <Check />
                 <Heading text={"Sign Up"}/>
                 <SubHeading text={"Enter your information to create an account"} />
                 <InputBox onChange={e=>setFirstName(e.target.value)} name={"First Name"} placeholder={"John"}/>

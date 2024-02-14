@@ -5,6 +5,7 @@ import {Button} from '../components/Button'
 import {BottomWarning} from '../components/BottomWarning'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import { Check } from '../components/Check'
 import axios from 'axios'
 
 export function SignIn() {
@@ -29,6 +30,7 @@ export function SignIn() {
     return (
         <div className='h-[632px] bg-gray-400 flex justify-center'>
             <div className='h-3/5 p-2 bg-white w-96 rounded-lg mt-9'>
+                <Check />
                 <Heading text={"Sign In"}/>
                 <SubHeading text={"Enter your credentials to access your account"} />
                 <br></br>

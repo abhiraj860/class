@@ -16,6 +16,12 @@ const signupSchema = z.object({
     password: z.string().min(1)
 });
 
+router.get('/me', authMiddleware, async(req, res)=>{
+    return res.status(200).json({
+        message: "User verified"
+    });
+});
+
 router.post('/signup', async (req, res)=>{
     const check = signupSchema.safeParse(req.body);
     const username = req.body.username;
