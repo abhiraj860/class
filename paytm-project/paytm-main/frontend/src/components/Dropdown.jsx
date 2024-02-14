@@ -1,13 +1,16 @@
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
-
+import {useNavigate} from 'react-router-dom';
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export function Dropdown({firstName}) {
+  const navigate = useNavigate();
+
   function clickHandler() {
-    console.log("Hello Here");
+    localStorage.clear();
+    navigate('/SignIn');
   }
   return (
     <Menu as="div" className="relative inline-block text-left">
