@@ -19,7 +19,6 @@ export function Dashboard() {
             <Appbar firstName={firstName}/>
             <Balance balance={balance} />
             <Users />
-            
         </div>
     )
 }

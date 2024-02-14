@@ -1,4 +1,3 @@
-
 export function Appbar({firstName}) {
    
     return (
