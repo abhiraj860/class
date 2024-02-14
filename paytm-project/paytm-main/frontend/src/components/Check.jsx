@@ -20,23 +20,3 @@ export function Check() {
         </div>
     )
 }
-
-export function CheckDash() {
-    const navigate = useNavigate();
-    useEffect(()=>{
-        try{
-            axios.get('http://localhost:3000/api/v1/user/me', {
-            headers : {
-                authorization: "Bearer " + localStorage.getItem("token")
-            }
-            }).then(()=>{navigate('/dashboard')}).catch(navigate('/signin'));
-        } catch(error) {
-            navigate('/signin');
-        }
-    } ,[]);
-    
-    return (
-        <div>
-        </div>
-    )
-}

@@ -24,7 +24,7 @@ export function Users() {
                 setShow(()=>true);
             } 
                 
-        }, 600);
+        }, 500);
         return () =>{
             clearInterval(t);
         }
