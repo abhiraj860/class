@@ -33,14 +33,14 @@ export function SignUp() {
     return (
         <div className='h-[632px] bg-gray-400 flex justify-center'>
             <div className='h-[530px] p-3 bg-white w-96 rounded-lg mt-9'>
-                <Heading text={"Sign up"}/>
+                <Heading text={"Sign Up"}/>
                 <SubHeading text={"Enter your information to create an account"} />
                 <InputBox onChange={e=>setFirstName(e.target.value)} name={"First Name"} placeholder={"John"}/>
                 <InputBox onChange={e=>setLastName(e.target.value)} name={"Last Name"} placeholder={"Doe"}/>
                 <InputBox onChange={e=>setusername(e.target.value)} name={"Email"} placeholder={"abhiraj@gmail.com"}/>
                 <InputBox onChange={e=>setPassword(e.target.value)} name={"Password"} placeholder={"123456"}/>
                 <Button onClick={clickHandler} text={"Sign Up"}/>
-                <BottomWarning text={"Already have an account?"} link={"Sign in"} to={'/signin'} />
+                <BottomWarning text={"Already have an account?"} link={"Sign In"} to={'/signin'} />
             </div>
         </div>
     )
