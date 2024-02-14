@@ -1,3 +1,4 @@
+import {Dropdown} from './Dropdown'
 export function Appbar({firstName}) {
    
     return (
@@ -10,11 +11,7 @@ export function Appbar({firstName}) {
                 <div className="mr-5">
                     Hello, {firstName} 
                 </div>
-                <div className="flex justify-center items-center border-2 border-slate-300 w-10 h-10 rounded-full bg-slate-300">
-                    <div>
-                        {firstName[0]}
-                    </div>
-                </div>
+                <Dropdown firstName={firstName[0]}/>
             </div>      
         </div>
     </div>
