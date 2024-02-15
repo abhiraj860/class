@@ -1,7 +1,8 @@
 const {Router} = require('express');
 const {authMiddleware} = require('./middleware');
-const {Account, User} = require('../db');
+const {Account, User, Transactions} = require('../db');
 const { default: mongoose } = require('mongoose');
+
 
 const router = Router();
 
