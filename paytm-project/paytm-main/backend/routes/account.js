@@ -28,6 +28,7 @@ router.post('/transfer', authMiddleware, async (req, res)=>{
             message: 'Insufficient balance'
         });
     }
+    const person = await Transactions.findOne({userId: req.userId}).session(session); 
 
     const toAccount = await Account.findOne({userId: to}).session(session);
 
@@ -38,9 +39,14 @@ router.post('/transfer', authMiddleware, async (req, res)=>{
         });
     }
 
+    const toPerson = await Transactions.findOne({userId: to}).session(session);
+
+
     await Account.updateOne({userId: req.userId}, {'$inc': {balance: -amount}}).session(session);
     await Account.updateOne({userId: to}, {'$inc': {balance: amount}}).session(session);
 
+    // Add the update statements to the Transactions collection here below
+    
     await session.commitTransaction();
     
     res.status(200).json({
