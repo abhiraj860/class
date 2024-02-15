@@ -16,7 +16,7 @@ export function Send() {
         <div>
             <div className="flex justify-end">
                  <div className="mt-5 mr-5">
-                    <button onClick={clickHandler} type="button" className="focus:outline-none text-white font-bold rounded-lg text-lg px-5 py-2.5 me-2 mb-2 dark:bg-black">Back</button>
+                    <button onClick={clickHandler} type="button" className="w-18 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Back</button>
                 </div>
             </div>
             <div className="flex justify-center">
