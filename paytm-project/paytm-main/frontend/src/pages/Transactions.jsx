@@ -1,7 +1,15 @@
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { Backbutton } from "../components/Backbutton";
+import axios from "axios";
 
 export function Transactions() {
+	useEffect(()=>{
+		axios.get('http://localhost:3000/api/v1/account/', {
+			headers: {
+				authorization: "Bearer " + localStorage.getItem("token")
+			}
+		}).then().catch((error)=>console.log("No data found"));
+	}, []);
 
 	return (
 		<div>

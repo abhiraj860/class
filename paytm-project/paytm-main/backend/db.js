@@ -49,10 +49,15 @@ const TransactionsSchema = new mongoose.Schema({
         required: true
     },
     transactions: [{
-        otherId:{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
-            required: true
+        firstName: {
+            type: String,
+            required: true,
+            maxLength: 50
+        },
+        lastName: {
+            type: String,
+            required: true,
+            maxLength: 50
         },
         amount: {
             type: Number,

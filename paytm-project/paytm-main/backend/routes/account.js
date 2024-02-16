@@ -16,6 +16,19 @@ router.get('/balance', authMiddleware,async (req, res)=>{
     });
 });
 
+// route.get('/getTransaction', authMiddleware, async(req, res)=>{
+//     const getId = req.userId;
+//     const getStatement = await Transactions.findById({userId: getId}, "transactions");
+//     console.log(getStatement);
+//     if(getStatement) {
+//         res.status(200).json({
+        
+//         })
+//     }
+// });
+
+
+
 router.post('/transfer', authMiddleware, async (req, res)=>{
     const session = await mongoose.startSession();
     session.startTransaction();
@@ -28,7 +41,6 @@ router.post('/transfer', authMiddleware, async (req, res)=>{
             message: 'Insufficient balance'
         });
     }
-    const person = await Transactions.findOne({userId: req.userId}).session(session); 
 
     const toAccount = await Account.findOne({userId: to}).session(session);
 
@@ -39,16 +51,18 @@ router.post('/transfer', authMiddleware, async (req, res)=>{
         });
     }
 
-    const toPerson = await Transactions.findOne({userId: to}).session(session);
-
 
     await Account.updateOne({userId: req.userId}, {'$inc': {balance: -amount}}).session(session);
     await Account.updateOne({userId: to}, {'$inc': {balance: amount}}).session(session);
 
-    const personToData = {otherId: to, amount: -amount, received: false };
-    const a = await Transactions.updateOne({userId: req.userId}, {$push:{transactions: personToData}}).session(session);
+    const fromData = await User.findById(req.userId, "firstName lastName").session(session);
+    const toData = await User.findById(to, "firstName lastName").session(session);
+    console.log(fromData);
 
-    const personData = {otherId: req.userId, amount: amount, received : true};
+    const personToData = {firstName: toData.firstName, lastName: toData.lastName, amount: -amount, received: false };
+    const a = await Transactions.updateOne({userId: req.userId}, {$push:{transactions: personToData}}).session(session);
+    
+    const personData = {firstName: fromData.firstName, lastName: fromData.lastName, amount: amount, received : true};
     await Transactions.updateOne({userId: to}, {$push:{transactions: personData}}).session(session);
 
     await session.commitTransaction();
