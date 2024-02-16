@@ -2,10 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Backbutton } from "../components/Backbutton";
 
 export function Transactions() {
-	const navigation = useNavigate();
-	function clickHandler() {
-		navigation("/dashboard");
-	}
+
 	return (
 		<div>
 			<div className="flex justify-center">
