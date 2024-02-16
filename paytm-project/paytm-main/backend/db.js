@@ -58,7 +58,7 @@ const TransactionsSchema = new mongoose.Schema({
             type: Number,
             required: true
         },
-        recieved: {
+        received: {
             type: Boolean,
             required: true
         }
