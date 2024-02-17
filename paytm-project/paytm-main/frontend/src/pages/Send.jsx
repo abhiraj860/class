@@ -13,15 +13,22 @@ export function Send() {
     const [loading, setLoading] = useState(true);
     
     useEffect(()=>{
-        axios.get("http://localhost:3000/api/v1/user/me", {
-            headers : {
-                authorization: "Bearer " + localStorage.getItem("token")
-            }
-        })
-        .then(response=>setLoading(()=>false))
-        .catch(error=>{navigate('/signin')});
+        if(id === null || name === null) {
+            {navigate('/dashboard')}
+        } else {
+            axios.get("http://localhost:3000/api/v1/user/me", {
+                headers : {
+                    authorization: "Bearer " + localStorage.getItem("token")
+                }
+            })
+            .then(response=>{
+                setLoading(()=>false);
+            })
+            .catch(error=>{navigate('/signin')});
+        }
     }, []);
     
+   
     return (
         <div>
             {loading === true ? <Loader /> : <SendPage name={name} id={id} navigate={navigate} /> }
