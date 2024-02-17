@@ -48,6 +48,14 @@ const TransactionsSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
+    received: {
+        type: Number,
+        required: true
+    },
+    send: {
+        type: Number,
+        required: true
+    },
     transactions: [{
         firstName: {
             type: String,

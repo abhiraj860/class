@@ -18,7 +18,7 @@ router.get('/balance', authMiddleware,async (req, res)=>{
 
 router.get('/getTransaction', authMiddleware, async(req, res)=>{
     const getId = req.userId;
-    const getStatement = await Transactions.findOne({userId:getId}, "transactions");
+    const getStatement = await Transactions.findOne({userId:getId}, "received send transactions");
     if(getStatement) {
        return res.status(200).json({
             statement: getStatement
@@ -59,13 +59,12 @@ router.post('/transfer', authMiddleware, async (req, res)=>{
 
     const fromData = await User.findById(req.userId, "firstName lastName").session(session);
     const toData = await User.findById(to, "firstName lastName").session(session);
-    console.log(fromData);
 
     const personToData = {firstName: toData.firstName, lastName: toData.lastName, amount: -amount, received: false };
-    const a = await Transactions.updateOne({userId: req.userId}, {$push:{transactions: personToData}}).session(session);
+    await Transactions.updateOne({userId: req.userId}, {'$inc': {send: -amount}}, {$push:{transactions: personToData}}).session(session);
     
     const personData = {firstName: fromData.firstName, lastName: fromData.lastName, amount: amount, received : true};
-    await Transactions.updateOne({userId: to}, {$push:{transactions: personData}}).session(session);
+    await Transactions.updateOne({userId: to}, {'$inc': {received: amount}}, {$push:{transactions: personData}}).session(session);
 
     await session.commitTransaction();
     
