@@ -30,7 +30,7 @@ export function SignIn() {
     return (
         <div className='h-[632px] bg-gray-400 flex justify-center'>
             <div className='h-3/5 p-2 bg-white w-96 rounded-lg mt-9'>
-                <Check />
+                <Check goto="/dashboard"/>
                 <Heading text={"Sign In"}/>
                 <SubHeading text={"Enter your credentials to access your account"} />
                 <br></br>

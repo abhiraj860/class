@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-export function Check() {
+export function Check({goto}) {
 	const navigate = useNavigate();
 	useEffect(() => {
 		try {
@@ -13,10 +13,10 @@ export function Check() {
 					},
 				})
 				.then(() => {
-					navigate("/dashboard");
+					navigate(goto);
 				});
 		} catch (error) {
-			console.log(error);
+			console.log(error);	
 		}
 	}, []);
 

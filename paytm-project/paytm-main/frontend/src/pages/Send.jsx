@@ -1,15 +1,36 @@
 import { useSearchParams } from "react-router-dom"
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Backbutton } from "../components/Backbutton";
+import { Loader } from "../components/Loader";
 
 export function Send() {
     const [searchParams] = useSearchParams();
     const id = searchParams.get("id");
     const name = searchParams.get("name");
-    const [amount, setamount] = useState(0);
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
+    
+    useEffect(()=>{
+        axios.get("http://localhost:3000/api/v1/user/me", {
+            headers : {
+                authorization: "Bearer " + localStorage.getItem("token")
+            }
+        })
+        .then(response=>setLoading(()=>false))
+        .catch(error=>{navigate('/signin')});
+    }, []);
+    
+    return (
+        <div>
+            {loading === true ? <Loader /> : <SendPage name={name} id={id} navigate={navigate} /> }
+        </div>
+    )
+}
+
+function SendPage({name, id, navigate}) {
+    const [amount, setamount] = useState(0);
     return (
         <div>
             <div className="flex justify-end">
@@ -66,4 +87,5 @@ export function Send() {
 
             </div>
         )
+
 }

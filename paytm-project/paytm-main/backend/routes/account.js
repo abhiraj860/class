@@ -61,10 +61,10 @@ router.post('/transfer', authMiddleware, async (req, res)=>{
     const toData = await User.findById(to, "firstName lastName").session(session);
 
     const personToData = {firstName: toData.firstName, lastName: toData.lastName, amount: -amount, received: false };
-    await Transactions.updateOne({userId: req.userId}, {'$inc': {send: -amount}}, {$push:{transactions: personToData}}).session(session);
+    await Transactions.updateOne({userId: req.userId}, {'$inc': {send: amount}, $push:{transactions: personToData}}).session(session);
     
     const personData = {firstName: fromData.firstName, lastName: fromData.lastName, amount: amount, received : true};
-    await Transactions.updateOne({userId: to}, {'$inc': {received: amount}}, {$push:{transactions: personData}}).session(session);
+    await Transactions.updateOne({userId: to}, {'$inc': {received: amount}, $push:{transactions: personData}}).session(session);
 
     await session.commitTransaction();
     
