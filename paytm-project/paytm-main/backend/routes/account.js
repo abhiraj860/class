@@ -16,16 +16,18 @@ router.get('/balance', authMiddleware,async (req, res)=>{
     });
 });
 
-// route.get('/getTransaction', authMiddleware, async(req, res)=>{
-//     const getId = req.userId;
-//     const getStatement = await Transactions.findById({userId: getId}, "transactions");
-//     console.log(getStatement);
-//     if(getStatement) {
-//         res.status(200).json({
-        
-//         })
-//     }
-// });
+router.get('/getTransaction', authMiddleware, async(req, res)=>{
+    const getId = req.userId;
+    const getStatement = await Transactions.findOne({userId:getId}, "transactions");
+    if(getStatement) {
+       return res.status(200).json({
+            statement: getStatement
+        })
+    } 
+    return res.status(400).json({
+        message: "No statment found"
+    })
+});
 
 
 

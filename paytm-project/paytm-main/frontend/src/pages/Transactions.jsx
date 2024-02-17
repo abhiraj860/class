@@ -1,18 +1,23 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Backbutton } from "../components/Backbutton";
 import axios from "axios";
 
 export function Transactions() {
+	const [transac, setTransac] = useState([{}]);
+
+
 	useEffect(()=>{
-		axios.get('http://localhost:3000/api/v1/account/', {
+		axios.get('http://localhost:3000/api/v1/account/getTransaction', {
 			headers: {
 				authorization: "Bearer " + localStorage.getItem("token")
 			}
-		}).then().catch((error)=>console.log("No data found"));
+		
+		}).then((res)=>{setTransac((t)=>res.data.statement.transactions)}).catch((error)=>console.log("No data found"));
 	}, []);
 
 	return (
 		<div>
+			{console.log(transac)}
 			<div className="flex justify-center">
 				<div className="flex items-center justify-between w-3/4 border-2 font-bold text-2xl p-4 rounded-xl">
 					<div>Transactions</div>
