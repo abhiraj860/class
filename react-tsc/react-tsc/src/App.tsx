@@ -1,16 +1,7 @@
-function Mybutton({title} : {title: string}) {
-  return (
-    <button> {title} </button>
-  )
-}
+export function App() {
+	return (
+		<div>
 
-function App() {
-  return (
-    <div>
-      <h1>Welcome to my app</h1>
-      <Mybutton title="I'm a button" />
-    </div>
-  )
+		</div>
+	)
 }
-
-export default App
