@@ -1,5 +1,6 @@
 import { Dropdown } from "./Dropdown";
 
+// Appbar functional components
 export function Appbar({ firstName }) {
 	return (
 		<div className="flex justify-center">
