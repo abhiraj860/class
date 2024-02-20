@@ -1,14 +1,28 @@
-type User = {
-    name: string;
-    age: number;
-    email: string;
-}
+import { z } from 'zod';
+import express from "express";
 
-const users = new Map<string, User>();
+const app = express();
 
-users.set('adfadfdflsd', {name:"Ras", age:30, email:"fsdf"});
-users.set('adfasd', {name:"Ras", age:30, email:"fsdf"});
+// Define the schema for profile update
+const userProfileSchema = z.object({
+  name: z.string().min(1, { message: "Name cannot be empty" }),
+  email: z.string().email({ message: "Invalid email format" }).optional(),
+});
 
-const user = users.get("adfasd");
+type FinalUserType = z.infer<typeof userProfileSchema>;
 
-console.log(user);
+app.put("/user", (req, res) => {
+  const { success } = userProfileSchema.safeParse(req.body);
+  const updateBody: FinalUserType = req.body; // how to assign a type to updateBody?
+
+  if (!success) {
+    res.status(411).json({});
+    return
+  }
+  // update database here
+  res.json({
+    message: "User updated"
+  })
+});
+
+app.listen(3000);
