@@ -6,8 +6,15 @@ interface User {
     password: string; 
 };
 
-type UpdatedProps = Pick<User, 'name' | 'age' | 'email' >
+type UpdateProps = Pick<User, 'name' | 'age' | 'email' >
 
-function updateUser(updatedProps: UpdatedProps) {
+type UpdatePropsOptional = Partial<UpdateProps>
+
+
+function updateUser(updateProps: UpdatePropsOptional) {
 
 }
+
+updateUser({
+    email: "afdfaf"
+})
