@@ -1,20 +1,17 @@
-interface User {
-    id: string;
+// readonly
+
+type User = {
     name: string;
-    age: string;
-    email: string;
-    password: string; 
-};
-
-type UpdateProps = Pick<User, 'name' | 'age' | 'email' >
-
-type UpdatePropsOptional = Partial<UpdateProps>
-
-
-function updateUser(updateProps: UpdatePropsOptional) {
-
+    age: number;
 }
 
-updateUser({
-    email: "afdfaf"
-})
+const user: Readonly<User> = {
+    name: "Abhiraj",
+    age: 32
+}
+
+user.age = 342;
+user.name = "sdfs"
+
+console.log(user.name)
+
