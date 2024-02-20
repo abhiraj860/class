@@ -1,17 +1,8 @@
-// readonly
+type Users = Record<string, {age: number; name: string}>;
 
-type User = {
-    name: string;
-    age: number;
+const users:Users = {
+    "first" : {age: 21, name: "abhiraj"},
+    "second" : {age: 34, name: "dfdfadf"} 
 }
 
-const user: Readonly<User> = {
-    name: "Abhiraj",
-    age: 32
-}
-
-user.age = 342;
-user.name = "sdfs"
-
-console.log(user.name)
 
