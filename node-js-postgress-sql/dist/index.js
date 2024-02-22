@@ -13,30 +13,29 @@ const pg_1 = require("pg");
 const client = new pg_1.Client({
     connectionString: 'postgresql://postgres:mysecretpassword@localhost/postgres'
 });
-function createUsersTable() {
-    return __awaiter(this, void 0, void 0, function* () {
-        yield client.connect();
-        const result = yield client.query(`
-        CREATE TABLE product (
-            id SERIAL PRIMARY KEY,
-            username VARCHAR(50) UNIQUE NOT NULL,
-            email VARCHAR(255) UNIQUE NOT NULL,
-            password VARCHAR(255) NOT NULL,
-            created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-        );
-    `);
-        console.log(result);
-    });
-}
+// async function createUsersTable() {
+//     await client.connect()
+//     const result = await client.query(`
+//         CREATE TABLE user1(
+//             id SERIAL PRIMARY KEY,
+//             username VARCHAR(50) UNIQUE NOT NULL,
+//             email VARCHAR(255) UNIQUE NOT NULL,
+//             password VARCHAR(255) NOT NULL,
+//             created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+//         );
+//     `);
+//     console.log(result);
+// }
 // createUsersTable();
-function insertTable() {
+function insertTable(username, email, password) {
     return __awaiter(this, void 0, void 0, function* () {
         yield client.connect();
+        // SQL injection
         const result = yield client.query(`
-        INSERT INTO users (username, email, password)
-        VALUES ('usernameHere2', 'user@example2.com', 'user_password')
-    `);
+        INSERT INTO user1(username, email, password)
+        VALUES ($1, $2, $3)
+    `, [username, email, password]);
         console.log(result);
     });
 }
-insertTable();
+insertTable("username45", "user45@gmail.com", "123456");
