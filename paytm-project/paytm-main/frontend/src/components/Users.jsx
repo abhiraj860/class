@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -58,8 +57,8 @@ function Helper({users}) {
         <div className="flex justify-between w-3/4 mt-5">
         <div className="flex justify-start items-center">
             <div className="flex justify-center items-center border-2 border-slate-300 w-10 h-10 rounded-full bg-slate-300">
-            <div>
-                U
+            <div className="font-bold">
+                {users.firstName[0].toUpperCase()}
             </div>
             </div>
             <div className="ml-3 font-bold text-md">

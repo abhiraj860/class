@@ -91,8 +91,8 @@ router.get('/bulk', authMiddleware, async (req, res)=>{
     const getUserId = req.userId;
     try {
         const getData = await User.find({ $or: [
-            { firstName: { $regex:getFilter} },
-            { lastName : { $regex:getFilter} }
+            { firstName: { $regex:getFilter, $options: 'i'} },
+            { lastName : { $regex:getFilter, $options: 'i'} }
           ],
         _id: {
             $ne: getUserId
@@ -110,30 +110,6 @@ router.get('/bulk', authMiddleware, async (req, res)=>{
     }
     
 });
-
-
-// const updateSchema = z.object({
-//     password: z.string().min(2).optional(),
-//     firstName: z.string().min(1).optional(),
-//     lastName: z.string().min(2).optional()
-// }).strict();
-
-// router.put('/', authMiddleware, async(req, res)=>{
-//     const getId = req.userId;
-//     const updates = req.body;
-//     const check = updateSchema.safeParse(updates);
-//     if(check.success) {
-//         const getObject = await User.findByIdAndUpdate(getId, updates);
-//         res.status(200).json({
-//             message: 'Updated successfully'
-//         });
-//     } else {
-//         res.status(411).json({
-//             message: 'Error while updating information'
-//         });
-//     }
-    
-// });
 
 
 router.use((err, req, res, next) => {
