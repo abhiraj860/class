@@ -1,8 +1,11 @@
-import axios from 'axios';
+import client from '@/db'
 
-async function fetchData() {
-    const resp = await axios.get("http://localhost:3000/api/user")
-    return resp.data;
+export async function fetchData() {
+    const user = await client.user.findFirst();
+    return {
+        email: user?.email,
+        name: "avdsf"
+    }
 }
 
 export default async function() {

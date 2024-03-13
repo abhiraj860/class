@@ -1,23 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
+import client from '@/db';
 
-export function GET(req: NextRequest) {
 
+export async function GET(req: NextRequest) {
+    const user = await client.user.findFirst();
     return NextResponse.json({
-        email: "abhiraj@gmail.com",
-        name: "Abhiraj"
+        email: user?.email,
+        name: "avdsf"
     });
 }
+// postgresql://abhiaditya860:GTx9J1XhZQLi@ep-twilight-violet-55759560.us-east-2.aws.neon.tech/neondb?sslmode=require
 
 export async function POST(req: NextRequest) {
-    const body = await req.json();
-    const name = body.name;
-    const pass = body.password;
-    console.log(body);
-    console.log(req.headers.get("authorization"));
-    console.log(req.nextUrl.searchParams.get("name"));
-    return NextResponse.json({
-        message: "You are signed up",
-        name,
-        pass
-    });
+    
 }
