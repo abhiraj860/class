@@ -12,9 +12,9 @@ export const Button = ({ children, className, appName }: ButtonProps) => {
   return (
     <button
       className={className}
-      onClick={() => alert(`Hello from your ${appName} app!`)}
+      onClick={() => alert(`Abhiraj app!`)}
     >
-      {children}
+      {`This is abhirah`}
     </button>
   );
 };
