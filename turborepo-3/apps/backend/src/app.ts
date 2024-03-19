@@ -1,9 +1,10 @@
 import express, {Express, Request, Response} from 'express';
 import cors from 'cors';
+import {BACKEND_URL} from "@repo/common/config"
 
 const app: Express = express();
 const PORT = 3000;
-
+console.log(BACKEND_URL);
 app.use(express.json());
 app.use(cors());
 
