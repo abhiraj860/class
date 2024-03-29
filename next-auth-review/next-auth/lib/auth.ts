@@ -10,31 +10,31 @@ const handler = NextAuth({
             password: {label: 'password', type: 'password', placeholder: "Enter Password"}
            },
            async authorize(credentials: any) {
-            // console.log(credentials);
+            console.log(credentials);
             return {
                 id: "User 1",
-                name: credentials.username,
-                password: credentials.password
-            } 
+                name: "adsdf",
+                user: "adfsdf",
+                email: "randomaemail"
+            }; 
            } 
         })
     ],
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
-            jwt: async ({ user, token }: any) => {
-            if (user) {
-                token.uid = user.id;
-            }
-            return token;
-            },
-        session: ({ session, token, user }: any) => {
-            console.log(session);
-            if (session.user) {
-                session.user.id = token.uid
-            }
-            return session
+        jwt: async ({ user, token }: any) => {
+        if (user) {
+            token.uid = user.id;
         }
+        return token;
         },
+      session: ({ session, token, user }: any) => {
+          if (session.user) {
+              session.user.id = token.uid
+          }
+          return session
+      }
+    },
 })
 
 export {handler as GET, handler as POST}
