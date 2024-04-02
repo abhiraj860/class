@@ -1,9 +1,7 @@
-const p = () => {
+const p = ()=> {
     return 5;
 }
 
-const p1 = ()=> {
-    return 5;
-}
+const a = p;
 
-console.log(p === p1);
+console.log(a === p);
