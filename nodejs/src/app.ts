@@ -1,5 +1,8 @@
-const path = require('path');
+const fs = require('fs');
 
-const pathObj = path.parse(__filename);
 
-console.log(pathObj);
+
+fs.readdir('#', function(err: Error, files: Promise<string[]>) {
+    if(err) console.log('##Error', err);
+    else console.log('Result', files);
+});

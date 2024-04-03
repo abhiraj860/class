@@ -1,4 +1,8 @@
 "use strict";
-const path = require('path');
-const pathObj = path.parse(__filename);
-console.log(pathObj);
+const fs = require('fs');
+fs.readdir('#', function (err, files) {
+    if (err)
+        console.log('##Error', err);
+    else
+        console.log('Result', files);
+});
