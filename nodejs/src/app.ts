@@ -1,8 +1,17 @@
-const fs = require('fs');
+import http from 'http';
 
-
-
-fs.readdir('#', function(err: Error, files: Promise<string[]>) {
-    if(err) console.log('##Error', err);
-    else console.log('Result', files);
+const server = http.createServer((req, res) => {
+    if(req.url === '/') {
+        res.write("Hi there");
+        res.end();
+    }
+    if(req.url === '/api/courses') {
+        res.write(JSON.stringify([1, 2,3,4]));
+        res.end();
+    }
 });
+
+
+server.listen(3000);
+
+console.log('listening on port 3000...');
