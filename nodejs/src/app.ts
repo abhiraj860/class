@@ -1,17 +1,9 @@
-import http from 'http';
+import { Logger } from "./logger";
 
-const server = http.createServer((req, res) => {
-    if(req.url === '/') {
-        res.write("Hi there");
-        res.end();
-    }
-    if(req.url === '/api/courses') {
-        res.write(JSON.stringify([1, 2,3,4]));
-        res.end();
-    }
+const logger = new Logger();
+
+logger.on('onces', (args)=>{
+    console.log(args);
 });
 
-
-server.listen(3000);
-
-console.log('listening on port 3000...');
+logger.log('Input message');

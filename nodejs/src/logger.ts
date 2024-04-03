@@ -1,8 +1,8 @@
-const EventEmitter = require('events');
+import { EventEmitter } from "events";
 
 export class Logger extends EventEmitter {
-    log(message:string) {
+    log(message: string) {
         console.log(message);
-        this.emit('messageLoggedd', {id: 1, url: "http://"});
+        this.emit('onces', {name: "Abhiraj", pass: "1234"});
     }
 }
