@@ -1,9 +1,9 @@
-import { Logger } from "./logger";
+import http from 'http';
+import url from 'url';
 
-const logger = new Logger();
-
-logger.on('onces', (args)=>{
-    console.log(args);
-});
-
-logger.log('Input message');
+http.createServer((req, res)=>{
+    res.writeHead(220, {'content-abhi' : 'abhi'});
+    const q = url.parse(req.url || "", true).query;
+    const txt = q.year + " " + q.month;
+    res.end(txt);
+}).listen(8080);
