@@ -1,28 +1,31 @@
 "use strict";
-var http = require('http');
-var formidable = require('formidable');
-var fs = require('fs');
-http.createServer(function (req, res) {
-    if (req.url == '/fileupload') {
-        const form = new formidable.IncomingForm();
-        form.parse(req, function (err, fields, files) {
-            const oldpath = files.filetoupload[0].filepath;
-            const newpath = 'C:/Users/abhia/' + files.filetoupload[0].originalFilename;
-            console.log(files);
-            fs.rename(oldpath, newpath, function (err) {
-                if (err)
-                    throw err;
-                res.write('File uploaded and moved!');
-                res.end();
-            });
-        });
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const nodemailer_1 = __importDefault(require("nodemailer"));
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+const transporter = nodemailer_1.default.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+        user: process.env.FROM_MAIL,
+        pass: process.env.FROM_PASSWORD
+    }
+});
+const mailOptions = {
+    from: process.env.FROM_MAIL,
+    to: process.env.TO_MAIL,
+    subject: 'Sending Email using Node.js',
+    html: '<h1>This is a header </h1>'
+};
+transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+        console.log(error);
     }
     else {
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.write('<form action="fileupload" method="post" enctype="multipart/form-data">');
-        res.write('<input type="file" name="filetoupload"><br>');
-        res.write('<input type="submit">');
-        res.write('</form>');
-        return res.end();
+        console.log('Email sent: ' + info.response);
     }
-}).listen(8080);
+});
