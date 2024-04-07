@@ -1,18 +1,28 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const http_1 = __importDefault(require("http"));
-const fs_1 = __importDefault(require("fs"));
-http_1.default.createServer((req, res) => {
-    fs_1.default.readFile('./summer.html', (err, data) => {
-        if (err) {
-            res.writeHead(200, { 'Content-Type': 'text/html' });
-            return res.end('404');
-        }
+var http = require('http');
+var formidable = require('formidable');
+var fs = require('fs');
+http.createServer(function (req, res) {
+    if (req.url == '/fileupload') {
+        const form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields, files) {
+            const oldpath = files.filetoupload[0].filepath;
+            const newpath = 'C:/Users/abhia/' + files.filetoupload[0].originalFilename;
+            console.log(files);
+            fs.rename(oldpath, newpath, function (err) {
+                if (err)
+                    throw err;
+                res.write('File uploaded and moved!');
+                res.end();
+            });
+        });
+    }
+    else {
         res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.write(data);
+        res.write('<form action="fileupload" method="post" enctype="multipart/form-data">');
+        res.write('<input type="file" name="filetoupload"><br>');
+        res.write('<input type="submit">');
+        res.write('</form>');
         return res.end();
-    });
-}).listen(3000);
+    }
+}).listen(8080);
