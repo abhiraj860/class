@@ -1,10 +1,11 @@
-const fetchPromise = require('./sum');
-
-
-test('this data is peanut butter', ()=>{
-    return  expect(fetchPromise()).resolves.toBe('peanut butter');
+test('spying on method on object', ()=>{
+    const video = {
+        play() {
+            return true;
+        },
+    };
+    const spy = jest.spyOn(video, 'play');
+    video.play();
+    expect(spy).toHaveBeenCalled();
+    spy.mockRestore();
 });
-
-test('the test fails with error', ()=>{
-    return expect(fetchPromise().rejects.toThrow('error'));
-})
