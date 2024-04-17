@@ -1,8 +1,10 @@
-const myFunction = require('./sum');
+const fetchPromise = require('./sum');
 
 
-test('throws on invlid input', ()=>{
-    expect(()=>{
-        myFunction("3");
-    }).toThrow();
+test('this data is peanut butter', ()=>{
+    return  expect(fetchPromise()).resolves.toBe('peanut butter');
+});
+
+test('the test fails with error', ()=>{
+    return expect(fetchPromise().rejects.toThrow('error'));
 })
