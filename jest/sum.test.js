@@ -1,5 +1,8 @@
-test('Object assignment', ()=> {
-    const data = {one: 1};
-    data.two = 2;
-    expect(data).toEqual({one:1, two:2});
+const myFunction = require('./sum');
+
+
+test('throws on invlid input', ()=>{
+    expect(()=>{
+        myFunction("3");
+    }).toThrow();
 })
