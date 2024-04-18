@@ -12,7 +12,6 @@ let users = [
 
 app.get('/users', (req, res) => {
     const { name }: {name?: string} = req.query;
-
     if (name) {
         const filteredUsers = users.filter(user => user.name.toLowerCase().includes(name.toLowerCase()));
         res.json(filteredUsers);
