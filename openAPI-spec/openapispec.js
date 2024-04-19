@@ -44,6 +44,36 @@ exports.openApiSpec = {
                         }
                     }
                 }
+            },
+            "post": {
+                "summary": "Get a list of users",
+                "description": "Retrieves a list of users, optionally filtered by name.",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "name",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false,
+                        "description": "Name filter for user lookup."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of users",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/User"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     },
@@ -68,5 +98,5 @@ exports.openApiSpec = {
                 ]
             }
         }
-    }
+    },
 };

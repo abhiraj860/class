@@ -23,6 +23,16 @@ app.get('/users', (req, res) => {
         res.json(users);
     }
 });
+app.post('/users', (req, res) => {
+    const { name } = req.query;
+    if (name) {
+        const filteredUsers = users.filter(user => user.name.toLowerCase().includes(name.toLowerCase()));
+        res.json(filteredUsers);
+    }
+    else {
+        res.json(users);
+    }
+});
 app.use('/documentation', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(openapispec_1.openApiSpec));
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
