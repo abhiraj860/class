@@ -1,14 +1,15 @@
-import { useState } from 'react'
+import { motion } from "framer-motion";
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <div>
-      <div className='w-40 h-40 bg-red-400'>
-      </div>
-    </div>
-  )
+	return (
+		<div className="flex justify-center">
+			<motion.div
+        animate={{rotate:[0, 200, 200, 0], x:[0, 200, 200, 0, -200, -200, 0]}}
+        transition={{repeat: Infinity, duration: 3}}
+        className="rounded-2xl w-40 h-40 bg-red-400 mt-20"
+			></motion.div>
+		</div>
+	);
 }
 
-export default App
+export default App;
