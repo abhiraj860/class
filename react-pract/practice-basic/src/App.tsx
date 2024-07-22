@@ -1,14 +1,17 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function App() {
-  const [color, setColor] = useState('red');
+  const [count, setCount] = useState(0);
+  const [calculation, setCalculation] = useState(0);
+  
+  useEffect(()=>{
+    setCalculation(()=> 2 * count);
+  }, [count]);  
 
   return <div>
-    <h1>My favourite color is {color}</h1>
-    <button onClick={()=>setColor(()=>'blue')}>Blue</button>
-    <button onClick={()=>setColor(()=>'red')}>Red</button>
-    <button onClick={()=>setColor(()=>'Pink')}>Pink</button>
-    <button onClick={()=>setColor(()=>'Green')}>Green</button>
+    <p>Count: {count}</p>
+    <button onClick={()=>setCount((c)=>c + 1)}>+</button>
+    <p>Calculation: {calculation}</p>
   </div>
 }
 
