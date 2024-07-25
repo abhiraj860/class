@@ -18,7 +18,7 @@ const Profile = async ()=> {
                 <ProfileClient />
             </div>
             <div>
-                <h1 className="text-2xl mb-4">Client Component</h1>
+                <h1 className="text-2xl mb-4">Server Component</h1>
                 <ProfileServer />
             </div>
         </div>
